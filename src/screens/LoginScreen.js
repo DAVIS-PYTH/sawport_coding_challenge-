@@ -1,26 +1,42 @@
 import { useState, useEffect } from "react";
+import { UserLoginAction } from "../actions/UserActions";
+import { useDispatch, useSelector } from "react-redux";
+import { FaUser, FaKey } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
 import { InputGroup, FormControl, Form, Button } from "react-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 
-import { FaUser, FaKey } from "react-icons/fa";
-import { Link } from "react-router-dom";
-
 const LoginScreen = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  useEffect(() => {}, []);
+  const dispatch = useDispatch();
+
+  const loginUser = useSelector((state) => state.UserLoginReducer);
+  const { loading, error, userDetails, success } = loginUser;
+
+  useEffect(() => {
+    if (userDetails || success) {
+      history.push("/admin");
+    }
+  }, [userDetails, success, history]);
 
   const submitHandler = (e) => {
     e.preventDefault();
+    dispatch(UserLoginAction({ email, password }, isAdmin));
   };
 
   return (
-    <div className="centerCard">
+    <div className="myContainer">
       <div className="loginCard">
         <Form className="loginForm" autoComplete="off" onSubmit={submitHandler}>
           <h3 className="text-center font-weight-bold loginText">Login!</h3>
+          {error && <Message variant="danger">{error}</Message>}
+          {loading && <Loader />}
+
           <InputGroup className="loginInput">
             <InputGroup.Prepend className="inputPrep">
               <InputGroup.Text id="basic-addon1">
@@ -56,6 +72,15 @@ const LoginScreen = ({ history }) => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </InputGroup>
+
+          <Form.Group className="mb-3" controlId="formBasicCheckbox">
+            <Form.Check
+              type="checkbox"
+              checked={isAdmin}
+              onChange={(e) => setIsAdmin(e.target.checked)}
+              label="Admin"
+            />
+          </Form.Group>
 
           <div className="loginBtnContainer">
             <Button

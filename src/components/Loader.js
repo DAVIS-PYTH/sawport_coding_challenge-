@@ -10,12 +10,10 @@ const Loader = ({ height = "50px", width = "50px" }) => {
         height: { height },
         width: { width },
         backgroundColor: "rgb(50, 5, 77)",
-        margin: "40px auto",
+        margin: "5px auto",
         display: "block",
       }}
-    >
-      <span className="sr-only">Loading...</span>
-    </Spinner>
+    ></Spinner>
   );
 };
 

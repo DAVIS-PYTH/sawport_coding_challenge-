@@ -23,6 +23,10 @@ body {
   font-weight: bold;
 }
 
+.opacity {
+  opacity: 0.8;
+}
+
 .loginCard {
   background: linear-gradient(
     to right bottom,
@@ -85,4 +89,98 @@ body {
   color: #ddd;
   font-weight: bold;
   border: none;
+}
+
+/* Admin dashboard styles */
+.adminComponent {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  min-height: 100vh;
+  background: linear-gradient(to right, #f1faf8, #e0e3e4);
+}
+
+.adminSideBar {
+  background-color: rgb(50, 5, 77);
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0px;
+  width: 100%;
+  max-height: 100vh;
+  padding: 20px 0;
+  z-index: 9;
+}
+
+/* .adminMainScreen {
+  padding: 10px;
+} */
+
+.admin-title {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  background-color: rgb(38, 9, 54);
+  padding: 5px 0;
+}
+
+.mainScreenTop {
+  background: linear-gradient(to right, #f1faf8, #e0e3e4);
+  box-shadow: 0 3px 10px rgba(38, 9, 54, 0.2);
+  height: 72px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.activities {
+  margin-top: 5px;
+  padding: 10px 30px;
+}
+
+.activityItem {
+  cursor: pointer;
+  padding: 5px 5px;
+  margin: 10px 0;
+}
+
+.activityItem:hover {
+  transform: scale(0.98);
+}
+
+.activity-text {
+  color: aqua;
+  opacity: 0.8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flexNav {
+  display: flex;
+}
+
+.dashboardGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.dashItemCard {
+  background-color: white;
+  box-shadow: 0 3px 10px rgba(38, 9, 54, 0.2);
+  padding: 10px 0;
+  border-radius: 10px;
+  border-left: 7px solid rgb(50, 5, 77);
+  height: 150px;
+}
+
+.dashTop {
+  border-bottom: 1px solid rgb(230, 226, 226);
+}
+
+.dashBottom {
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
