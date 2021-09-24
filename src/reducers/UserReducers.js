@@ -17,6 +17,10 @@ import {
   ADMIN_DELETE_SUCCESS,
   ADMIN_DELETE_FAIL,
   ADMIN_DELETE_RESET,
+  USER_DELETE_REQUEST,
+  USER_DELETE_SUCCESS,
+  USER_DELETE_FAIL,
+  USER_DELETE_RESET,
   ADMIN_REGISTER_REQUEST,
   ADMIN_REGISTER_SUCCESS,
   ADMIN_REGISTER_FAIL,
@@ -124,6 +128,25 @@ export const DeleteAdminReducer = (state = {}, action) => {
       return { loading: false, error: action.payload };
 
     case ADMIN_DELETE_RESET:
+      return {};
+
+    default:
+      return state;
+  }
+};
+
+export const DeleteUserReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_DELETE_REQUEST:
+      return { loading: true };
+
+    case USER_DELETE_SUCCESS:
+      return { loading: false, success: true };
+
+    case USER_DELETE_FAIL:
+      return { loading: false, error: action.payload };
+
+    case USER_DELETE_RESET:
       return {};
 
     default:
