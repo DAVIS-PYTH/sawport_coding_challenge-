@@ -2,6 +2,9 @@ import {
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAIL,
+  ADMIN_REGISTER_REQUEST,
+  ADMIN_REGISTER_SUCCESS,
+  ADMIN_REGISTER_FAIL,
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAIL,
@@ -63,6 +66,40 @@ export const UserRegisterAction = (user) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const AdminRegisterAction = (user) => async (dispatch) => {
+  try {
+    dispatch({ type: ADMIN_REGISTER_REQUEST });
+
+    var url = "https://customer-care-platform.herokuapp.com/admins/signup";
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        "X-CSRFToken": csrftoken,
+      },
+      body: JSON.stringify(user),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(
+        data.message ? data.message : "Request could not be processed!"
+      );
+    }
+
+    dispatch({ type: ADMIN_REGISTER_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: ADMIN_REGISTER_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

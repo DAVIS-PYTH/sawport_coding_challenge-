@@ -17,9 +17,10 @@ import {
   ADMIN_DELETE_SUCCESS,
   ADMIN_DELETE_FAIL,
   ADMIN_DELETE_RESET,
-  FETCH_ALL_ADMINS_SUCCESS,
-  FETCH_ALL_ADMINS_FAIL,
-  FETCH_ALL_ADMINS_RESET,
+  ADMIN_REGISTER_REQUEST,
+  ADMIN_REGISTER_SUCCESS,
+  ADMIN_REGISTER_FAIL,
+  ADMIN_REGISTER_RESET,
 } from "../constants/UserConstants";
 
 export const UserRegisterReducer = (state = {}, action) => {
@@ -34,6 +35,25 @@ export const UserRegisterReducer = (state = {}, action) => {
       return { loading: false, error: action.payload };
 
     case USER_REGISTER_RESET:
+      return {};
+
+    default:
+      return state;
+  }
+};
+
+export const AdminRegisterReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ADMIN_REGISTER_REQUEST:
+      return { loading: true };
+
+    case ADMIN_REGISTER_SUCCESS:
+      return { loading: false, success: true, userDetails: action.payload };
+
+    case ADMIN_REGISTER_FAIL:
+      return { loading: false, error: action.payload };
+
+    case ADMIN_REGISTER_RESET:
       return {};
 
     default:

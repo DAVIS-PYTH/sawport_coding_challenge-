@@ -8,11 +8,13 @@ import {
   GetUsersReducer,
   GetAdminsReducer,
   DeleteAdminReducer,
+  AdminRegisterReducer,
 } from "./reducers/UserReducers";
 
 const reducers = combineReducers({
   UserLoginReducer: UserLoginReducer,
   UserRegisterReducer: UserRegisterReducer,
+  AdminRegisterReducer: AdminRegisterReducer,
   GetUsersReducer: GetUsersReducer,
   GetAdminsReducer: GetAdminsReducer,
   DeleteAdminReducer: DeleteAdminReducer,

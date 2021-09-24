@@ -77,7 +77,10 @@ const AdminComponent = ({ children }) => {
             </h6>
           </div>
 
-          <div className="activityItem">
+          <div
+            className="activityItem"
+            onClick={() => redirectHandler("/admin/new/sign_up")}
+          >
             <h6 className="activity-text font-weight-bold">
               <span>
                 <FaUserPlus /> Add Admin
