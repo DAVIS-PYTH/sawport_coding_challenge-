@@ -7,6 +7,12 @@ import {
   USER_LOGIN_FAIL,
   USER_DETAILS_RESET,
   USER_REGISTER_RESET,
+  ADMIN_GET_USERS_REQUEST,
+  ADMIN_GET_USERS_SUCCESS,
+  ADMIN_GET_USERS_FAIL,
+  ADMIN_GET_ADMINS_REQUEST,
+  ADMIN_GET_ADMINS_SUCCESS,
+  ADMIN_GET_ADMINS_FAIL,
 } from "../constants/UserConstants";
 
 export const UserRegisterReducer = (state = {}, action) => {
@@ -41,6 +47,38 @@ export const UserLoginReducer = (state = {}, action) => {
 
     case USER_DETAILS_RESET:
       return {};
+
+    default:
+      return state;
+  }
+};
+
+export const GetUsersReducer = (state = { users: [] }, action) => {
+  switch (action.type) {
+    case ADMIN_GET_USERS_REQUEST:
+      return { loading: true };
+
+    case ADMIN_GET_USERS_SUCCESS:
+      return { loading: false, users: action.payload };
+
+    case ADMIN_GET_USERS_FAIL:
+      return { loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+};
+
+export const GetAdminsReducer = (state = { admins: [] }, action) => {
+  switch (action.type) {
+    case ADMIN_GET_ADMINS_REQUEST:
+      return { loading: true };
+
+    case ADMIN_GET_ADMINS_SUCCESS:
+      return { loading: false, admins: action.payload };
+
+    case ADMIN_GET_ADMINS_FAIL:
+      return { loading: false, error: action.payload };
 
     default:
       return state;

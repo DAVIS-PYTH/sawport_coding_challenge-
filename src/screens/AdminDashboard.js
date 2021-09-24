@@ -1,6 +1,24 @@
 import AdminComponent from "../components/AdminComponent";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getUsersAction, getAdminsAction } from "../actions/UserActions";
 
 const AdminDashboard = () => {
+  const dispatch = useDispatch();
+
+  const allUsers = useSelector((state) => state.GetUsersReducer);
+  const { users } = allUsers;
+  const realUsers = users ? users.data : null;
+
+  const allAdmins = useSelector((state) => state.GetAdminsReducer);
+  const { admins } = allAdmins;
+  const realAdmins = admins ? admins.data : null;
+
+  useEffect(() => {
+    dispatch(getUsersAction());
+    dispatch(getAdminsAction());
+  }, [dispatch]);
+
   return (
     <AdminComponent>
       <div className="dashboardGrid">
@@ -12,7 +30,11 @@ const AdminDashboard = () => {
           </div>
 
           <div className="font-weight-bold dashBottom">
-            <h1 className="font-weight-bold tint opacity text-center">190 </h1>
+            <h1 className="font-weight-bold tint opacity text-center">
+              {realAdmins && realUsers
+                ? realAdmins.length + realUsers.length
+                : 0}{" "}
+            </h1>
           </div>
         </div>
 
@@ -24,7 +46,9 @@ const AdminDashboard = () => {
           </div>
 
           <div className="font-weight-bold dashBottom">
-            <h1 className="font-weight-bold tint opacity text-center">30 </h1>
+            <h1 className="font-weight-bold tint opacity text-center">
+              {realAdmins ? realAdmins.length : 0}
+            </h1>
           </div>
         </div>
 
@@ -34,7 +58,9 @@ const AdminDashboard = () => {
           </div>
 
           <div className="font-weight-bold dashBottom">
-            <h1 className="font-weight-bold tint opacity text-center">160 </h1>
+            <h1 className="font-weight-bold tint opacity text-center">
+              {realUsers ? realUsers.length : 0}{" "}
+            </h1>
           </div>
         </div>
       </div>

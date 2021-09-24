@@ -6,6 +6,12 @@ import {
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAIL,
   USER_REGISTER_RESET,
+  ADMIN_GET_USERS_REQUEST,
+  ADMIN_GET_USERS_SUCCESS,
+  ADMIN_GET_USERS_FAIL,
+  ADMIN_GET_ADMINS_REQUEST,
+  ADMIN_GET_ADMINS_SUCCESS,
+  ADMIN_GET_ADMINS_FAIL,
 } from "../constants/UserConstants";
 
 function getCookie(name) {
@@ -77,6 +83,8 @@ export const UserLoginAction = (user, admin) => async (dispatch) => {
       headers: {
         "Content-type": "application/json",
         "X-CSRFToken": csrftoken,
+        "x-auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTRjOGM5OTAzNTc1YzAwN2UzZTE1MTMiLCJpYXQiOjE2MzI0MDY2ODEsImV4cCI6MTYzMjQ5MzA4MX0.1JHZkrZ2LDVkDVVSd4hb5rXJvUJriIb00R-fLX-zXJo",
       },
       body: JSON.stringify({
         email: user.email,
@@ -97,6 +105,72 @@ export const UserLoginAction = (user, admin) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getUsersAction = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: ADMIN_GET_USERS_REQUEST });
+    var url = "https://customer-care-platform.herokuapp.com/users/";
+
+    const { userDetails } = getState().UserLoginReducer;
+
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "x-auth-token": `${userDetails.token}`,
+      },
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.message ? data.message : "Unable to fetch data!");
+    }
+
+    dispatch({ type: ADMIN_GET_USERS_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: ADMIN_GET_USERS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getAdminsAction = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: ADMIN_GET_ADMINS_REQUEST });
+    var url = "https://customer-care-platform.herokuapp.com/admins/";
+
+    const { userDetails } = getState().UserLoginReducer;
+
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "x-auth-token": `${userDetails.token}`,
+      },
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.message ? data.message : "Unable to fetch data!");
+    }
+
+    dispatch({ type: ADMIN_GET_ADMINS_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: ADMIN_GET_ADMINS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
