@@ -13,6 +13,13 @@ import {
   ADMIN_GET_ADMINS_REQUEST,
   ADMIN_GET_ADMINS_SUCCESS,
   ADMIN_GET_ADMINS_FAIL,
+  ADMIN_DELETE_REQUEST,
+  ADMIN_DELETE_SUCCESS,
+  ADMIN_DELETE_FAIL,
+  ADMIN_DELETE_RESET,
+  FETCH_ALL_ADMINS_SUCCESS,
+  FETCH_ALL_ADMINS_FAIL,
+  FETCH_ALL_ADMINS_RESET,
 } from "../constants/UserConstants";
 
 export const UserRegisterReducer = (state = {}, action) => {
@@ -79,6 +86,25 @@ export const GetAdminsReducer = (state = { admins: [] }, action) => {
 
     case ADMIN_GET_ADMINS_FAIL:
       return { loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+};
+
+export const DeleteAdminReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ADMIN_DELETE_REQUEST:
+      return { loading: true };
+
+    case ADMIN_DELETE_SUCCESS:
+      return { loading: false, success: true };
+
+    case ADMIN_DELETE_FAIL:
+      return { loading: false, error: action.payload };
+
+    case ADMIN_DELETE_RESET:
+      return {};
 
     default:
       return state;

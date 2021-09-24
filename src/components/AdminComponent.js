@@ -27,10 +27,17 @@ const AdminComponent = ({ children }) => {
     }
   };
 
+  const redirectHandler = (url) => {
+    history.push(url);
+  };
   return (
     <div className="adminComponent">
       <div className="adminSideBar">
-        <div className="admin-title">
+        <div
+          className="admin-title"
+          style={{ cursor: "pointer" }}
+          onClick={() => redirectHandler("/admin")}
+        >
           <h3 className="font-weight-bold text-center text-white">
             <FaTachometerAlt /> SAWPORT.INC
           </h3>
@@ -103,7 +110,10 @@ const AdminComponent = ({ children }) => {
             </h6>
           </div>
 
-          <div className="activityItem">
+          <div
+            className="activityItem"
+            onClick={() => redirectHandler("/admin/delete")}
+          >
             <h6 className="activity-text text-warning font-weight-bold">
               <span>
                 <FaTrash /> Delete Account

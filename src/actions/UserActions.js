@@ -13,6 +13,9 @@ import {
   ADMIN_GET_ADMINS_REQUEST,
   ADMIN_GET_ADMINS_SUCCESS,
   ADMIN_GET_ADMINS_FAIL,
+  ADMIN_DELETE_REQUEST,
+  ADMIN_DELETE_SUCCESS,
+  ADMIN_DELETE_FAIL,
 } from "../constants/UserConstants";
 
 function getCookie(name) {
@@ -168,6 +171,39 @@ export const getAdminsAction = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ADMIN_GET_ADMINS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const AdminDeleteAction = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: ADMIN_DELETE_REQUEST });
+    var url = `https://customer-care-platform.herokuapp.com/admins/delete/${id}`;
+
+    const { userDetails } = getState().UserLoginReducer;
+
+    const res = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        "x-auth-token": `${userDetails.token}`,
+      },
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.message ? data.message : "Something went wrong!");
+    }
+
+    dispatch({ type: ADMIN_DELETE_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: ADMIN_DELETE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
