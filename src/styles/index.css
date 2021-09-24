@@ -196,3 +196,15 @@ button:disabled {
   padding: 20px;
   border-radius: 5px;
 }
+
+.AdminRow {
+  width: 100%;
+  margin: 5px auto;
+  background: linear-gradient(to right, #f1faf8, #e0e3e4);
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.mrr-3 {
+  margin-right: 20px;
+}

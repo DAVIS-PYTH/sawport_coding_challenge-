@@ -44,7 +44,10 @@ const AdminComponent = ({ children }) => {
         </div>
 
         <div className="activities">
-          <div className="activityItem">
+          <div
+            className="activityItem"
+            onClick={() => redirectHandler("/admin/profiles")}
+          >
             <h6 className="activity-text font-weight-bold">
               <span>
                 <FaUserCircle /> Manage Profiles
