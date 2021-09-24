@@ -5,6 +5,7 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAIL,
+  USER_DETAILS_RESET,
   USER_REGISTER_RESET,
   ADMIN_GET_USERS_REQUEST,
   ADMIN_GET_USERS_SUCCESS,
@@ -179,9 +180,8 @@ export const getAdminsAction = () => async (dispatch, getState) => {
   }
 };
 
-//   export const UserLogOutAction = () => async (dispatch) => {
-//     dispatch({ type: USER_LOGOUT });
-//     dispatch({ type: USER_DETAILS_RESET });
-//     dispatch({ type: USER_REGISTER_RESET });
-//     localStorage.removeItem("userDetails");
-//   };
+export const UserLogOutAction = () => async (dispatch) => {
+  dispatch({ type: USER_DETAILS_RESET });
+  dispatch({ type: USER_REGISTER_RESET });
+  localStorage.removeItem("userDetails");
+};

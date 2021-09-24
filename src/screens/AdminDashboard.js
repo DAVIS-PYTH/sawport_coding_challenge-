@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getUsersAction, getAdminsAction } from "../actions/UserActions";
 
-const AdminDashboard = () => {
+const AdminDashboard = ({ history }) => {
   const dispatch = useDispatch();
 
   const allUsers = useSelector((state) => state.GetUsersReducer);
@@ -14,10 +14,17 @@ const AdminDashboard = () => {
   const { admins } = allAdmins;
   const realAdmins = admins ? admins.data : null;
 
+  const loginUser = useSelector((state) => state.UserLoginReducer);
+  const { userDetails: userInfo } = loginUser;
+
   useEffect(() => {
+    if (!userInfo) {
+      history.push("/");
+    }
+
     dispatch(getUsersAction());
     dispatch(getAdminsAction());
-  }, [dispatch]);
+  }, [dispatch, history, userInfo]);
 
   return (
     <AdminComponent>
