@@ -25,6 +25,9 @@ import {
   ADMIN_REGISTER_SUCCESS,
   ADMIN_REGISTER_FAIL,
   ADMIN_REGISTER_RESET,
+  ADMIN_GET_USER_DETAILS_REQUEST,
+  ADMIN_GET_USER_DETAILS_SUCCESS,
+  ADMIN_GET_USER_DETAILS_FAIL,
 } from "../constants/UserConstants";
 
 export const UserRegisterReducer = (state = {}, action) => {
@@ -93,6 +96,22 @@ export const GetUsersReducer = (state = { users: [] }, action) => {
       return { loading: false, users: action.payload };
 
     case ADMIN_GET_USERS_FAIL:
+      return { loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+};
+
+export const SingleUserReducer = (state = { user: {} }, action) => {
+  switch (action.type) {
+    case ADMIN_GET_USER_DETAILS_REQUEST:
+      return { loading: true };
+
+    case ADMIN_GET_USER_DETAILS_SUCCESS:
+      return { loading: false, user: action.payload };
+
+    case ADMIN_GET_USER_DETAILS_FAIL:
       return { loading: false, error: action.payload };
 
     default:

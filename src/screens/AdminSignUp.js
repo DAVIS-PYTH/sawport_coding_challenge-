@@ -69,10 +69,13 @@ const AdminSignUp = ({ history }) => {
     <AdminComponent>
       <div className="changePassRow">
         <Form className="loginForm" autoComplete="off" onSubmit={submitHandler}>
+          {" "}
+          <h3 className="text-center font-weight-bold loginText">
+            CREATE ADMIN USER
+          </h3>
           {error && <Message variant="danger">{error}</Message>}
           {message && <Message variant="danger">{message}</Message>}
           {loading && <Loader />}
-
           <Row className="loginInput">
             <Col md={6}>
               <InputGroup>
@@ -112,7 +115,6 @@ const AdminSignUp = ({ history }) => {
               </InputGroup>
             </Col>
           </Row>
-
           <Row className="loginInput">
             <Col md={6}>
               <InputGroup>
@@ -154,7 +156,6 @@ const AdminSignUp = ({ history }) => {
               </InputGroup>
             </Col>
           </Row>
-
           <InputGroup className="loginInput ixap">
             <InputGroup.Prepend className="inputPrep">
               <InputGroup.Text id="basic-addon1">
@@ -172,7 +173,6 @@ const AdminSignUp = ({ history }) => {
               onChange={(e) => setPhone(e.target.value)}
             />
           </InputGroup>
-
           <InputGroup className="loginInput ixap">
             <InputGroup.Prepend className="inputPrep">
               <InputGroup.Text id="basic-addon1">
@@ -190,7 +190,6 @@ const AdminSignUp = ({ history }) => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </InputGroup>
-
           <InputGroup className="mb-1 loginInputPass">
             <InputGroup.Prepend className="inputPrep">
               <InputGroup.Text id="basic-addon1">
@@ -208,7 +207,6 @@ const AdminSignUp = ({ history }) => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </InputGroup>
-
           <InputGroup className="mb-1 loginInputPass">
             <InputGroup.Prepend className="inputPrep">
               <InputGroup.Text id="basic-addon1">
@@ -226,7 +224,6 @@ const AdminSignUp = ({ history }) => {
               onChange={(e) => setCPassword(e.target.value)}
             />
           </InputGroup>
-
           <div className="loginBtnContainer">
             <Button
               type="submit"

@@ -58,7 +58,10 @@ const AdminComponent = ({ children }) => {
             </h6>
           </div>
 
-          <div className="activityItem">
+          <div
+            className="activityItem"
+            onClick={() => window.alert("No Available Alerts Admin!")}
+          >
             <h6 className="activity-text font-weight-bold">
               <span>
                 <FaBell /> Alerts
@@ -69,7 +72,12 @@ const AdminComponent = ({ children }) => {
             </h6>
           </div>
 
-          <div className="activityItem">
+          <div
+            className="activityItem"
+            onClick={() =>
+              window.alert("API Error, Please contact your developer!")
+            }
+          >
             <h6 className="activity-text font-weight-bold">
               <span>
                 <FaUserEdit /> Edit Profile
@@ -94,7 +102,10 @@ const AdminComponent = ({ children }) => {
             </h6>
           </div>
 
-          <div className="activityItem">
+          <div
+            className="activityItem"
+            onClick={() => window.alert("No Available Complaints Admin!")}
+          >
             <h6 className="activity-text font-weight-bold">
               <span>
                 <FaInfoCircle /> Complaints

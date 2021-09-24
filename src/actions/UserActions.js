@@ -22,6 +22,9 @@ import {
   USER_DELETE_REQUEST,
   USER_DELETE_SUCCESS,
   USER_DELETE_FAIL,
+  ADMIN_GET_USER_DETAILS_REQUEST,
+  ADMIN_GET_USER_DETAILS_SUCCESS,
+  ADMIN_GET_USER_DETAILS_FAIL,
 } from "../constants/UserConstants";
 
 function getCookie(name) {
@@ -178,6 +181,39 @@ export const getUsersAction = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ADMIN_GET_USERS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getUserAction = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: ADMIN_GET_USER_DETAILS_REQUEST });
+    var url = `https://customer-care-platform.herokuapp.com/users/${id}`;
+
+    const { userDetails } = getState().UserLoginReducer;
+
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "x-auth-token": `${userDetails.token}`,
+      },
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.message ? data.message : "Unable to fetch data!");
+    }
+
+    dispatch({ type: ADMIN_GET_USER_DETAILS_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: ADMIN_GET_USER_DETAILS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

@@ -5,6 +5,7 @@ import AdminSignUp from "./screens/AdminSignUp";
 import AdminViewProfileScreen from "./screens/AdminViewProfileScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
+import UserEditScreen from "./screens/UserEditScreen";
 
 function App() {
   return (
@@ -13,6 +14,11 @@ function App() {
         <Route path="/" component={LoginScreen} exact />
         <Route path="/register" component={RegisterScreen} exact />
         <Route path="/admin" component={AdminDashboard} exact />
+        <Route
+          path="/admin/user/edit_user/:id"
+          component={UserEditScreen}
+          exact
+        />
         <Route path="/admin/delete" component={AdminDeleteScreen} exact />
         <Route
           path="/admin/profiles"

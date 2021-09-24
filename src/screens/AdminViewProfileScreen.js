@@ -55,6 +55,10 @@ const AdminViewProfileScreen = ({ history }) => {
     }
   };
 
+  const userEditHandler = (id) => {
+    history.push(`/admin/user/edit_user/${id}`);
+  };
+
   useEffect(() => {
     if (!userInfo) {
       history.push("/");
@@ -105,7 +109,11 @@ const AdminViewProfileScreen = ({ history }) => {
                     <FaTimes className="text-danger" />
                   </td>
                   <td>
-                    <Button variant="light" className="btn-sm  mrr-3">
+                    <Button
+                      variant="light"
+                      className="btn-sm  mrr-3"
+                      onClick={() => userEditHandler(user._id)}
+                    >
                       <FaEdit />
                     </Button>
 
@@ -129,7 +137,13 @@ const AdminViewProfileScreen = ({ history }) => {
                     <FaCheck className="text-success" />
                   </td>
                   <td>
-                    <Button variant="light" className="btn-sm mrr-3">
+                    <Button
+                      variant="light"
+                      className="btn-sm mrr-3"
+                      onClick={() =>
+                        window.alert("Invalid Api Route for this Action!")
+                      }
+                    >
                       <FaEdit />
                     </Button>
 

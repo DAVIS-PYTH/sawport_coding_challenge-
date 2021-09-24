@@ -10,9 +10,11 @@ import {
   DeleteAdminReducer,
   DeleteUserReducer,
   AdminRegisterReducer,
+  SingleUserReducer,
 } from "./reducers/UserReducers";
 
 const reducers = combineReducers({
+  SingleUserReducer: SingleUserReducer,
   UserLoginReducer: UserLoginReducer,
   UserRegisterReducer: UserRegisterReducer,
   AdminRegisterReducer: AdminRegisterReducer,
