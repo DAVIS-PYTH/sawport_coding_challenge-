@@ -36,25 +36,21 @@ export const UserRegisterAction = (user) => async (dispatch) => {
   try {
     dispatch({ type: USER_REGISTER_REQUEST });
 
-    var url = "/api/authenticate/register/";
+    var url = "https://customer-care-platform.herokuapp.com/users/signup";
     const res = await fetch(url, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
         "X-CSRFToken": csrftoken,
       },
-      body: JSON.stringify({
-        name: user.name,
-        email: user.email,
-        password: user.password,
-      }),
+      body: JSON.stringify(user),
     });
 
     const data = await res.json();
 
     if (!res.ok) {
       throw new Error(
-        data.detail ? data.detail : "Request could not be processed!"
+        data.message ? data.message : "Request could not be processed!"
       );
     }
 
@@ -65,8 +61,8 @@ export const UserRegisterAction = (user) => async (dispatch) => {
     dispatch({
       type: USER_REGISTER_FAIL,
       payload:
-        error.response && error.response.data.detail
-          ? error.response.data.detail
+        error.response && error.response.data.message
+          ? error.response.data.message
           : error.message,
     });
   }
@@ -85,7 +81,7 @@ export const UserLoginAction = (user, admin) => async (dispatch) => {
         "Content-type": "application/json",
         "X-CSRFToken": csrftoken,
         "x-auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTRjOGM5OTAzNTc1YzAwN2UzZTE1MTMiLCJpYXQiOjE2MzI0MDY2ODEsImV4cCI6MTYzMjQ5MzA4MX0.1JHZkrZ2LDVkDVVSd4hb5rXJvUJriIb00R-fLX-zXJo",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTRkZTFiYzYzODliMjAwN2U5YzNkYWUiLCJpYXQiOjE2MzI0OTQwMTIsImV4cCI6MTYzMjU4MDQxMn0.jT22JVaj_s8ivlqxc334_rAwRCJBQ1INq0Q7KYIvLeg",
       },
       body: JSON.stringify({
         email: user.email,
